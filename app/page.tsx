@@ -11,7 +11,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By yacobeter
+            By yacobeter v0.1.0
           </a>
         </div>
       </div>
