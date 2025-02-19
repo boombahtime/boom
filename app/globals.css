@@ -25,3 +25,35 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.wall {
+  height: auto;
+}
+.row {
+  display: flex;
+  border-top: 2px solid white;
+}
+
+.row .brick {
+  flex-grow: 2;
+}
+
+.row .brick:not(:last-child) {
+  border-right: 2px solid white;
+}
+
+.row:nth-child(even) > .brick:first-child,
+.row:nth-child(even) > .brick:last-child {
+  flex-grow: 1;
+}
+
+.brick {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  height: 50px;
+  color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+}
