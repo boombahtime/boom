@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex">
+        <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm flex">
           <div className="bg-blue-200 p-4 opacity-90">
             <input className="bg-red-200" type="file" ref={inputRef} />
             <button
@@ -105,11 +105,11 @@ export default function Home() {
      \::/  /   \:\  \        \:\  \        \:\/:/  /     \:\/:/  /     \/_/:/  /  
      /:/  /     \:\__\        \:\__\        \::/  /       \::/  /        /:/  /   
      \/__/       \/__/         \/__/         \/__/         \/__/         \/__/     */}
-      <div className="bg-red-100 absoslute b-0 r-0 w-[600px] h-auto rounded-xl p-12">
+      <div className="bg-red-100 absoslute b-0 r-0 w-9/10 h-auto rounded-xl p-12">
         <Images loading={!!uploading} />
       </div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        {/* <a
+      {/* <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left"> */}
+      {/* <a
           href="/upload"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
@@ -123,7 +123,7 @@ export default function Home() {
           <img ref={imgRef} className="w-32 bg-blue-50" />
           <img ref={imgRef1} className="w-32 bg-blue-50" />
         </a> */}
-      </div>
+      {/* </div> */}
     </main>
   );
 }
