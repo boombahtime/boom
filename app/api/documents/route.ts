@@ -5,13 +5,18 @@ import {
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
 
-const bucketName = "boombahtime-media";
-const Bucket = bucketName;
-const s3 = new S3Client({});
+const BUCKET_NAME = "boombahtime-media";
+const BUCKET_REGION = "us-east-2";
+const s3 = new S3Client({ region: BUCKET_REGION });
 
 // endpoint to get the list of files in the bucket
 export async function GET() {
-  const response = await s3.send(new ListObjectsCommand({ Bucket }));
+  console.log("GET /documents");
+  console.log("Bucket: ", BUCKET_NAME);
+  console.log("GET /documents");
+  const response = await s3.send(
+    new ListObjectsCommand({ Bucket: BUCKET_NAME })
+  );
   const nextResponse = NextResponse.json(response?.Contents ?? []);
   return nextResponse;
 }
@@ -24,7 +29,9 @@ export async function POST(request: NextRequest) {
     files.map(async (file, fileIdx) => {
       // not sure why I have to override the types here
       const Body = (await file.arrayBuffer()) as Buffer;
-      s3.send(new PutObjectCommand({ Bucket, Key: file.name, Body }));
+      s3.send(
+        new PutObjectCommand({ Bucket: BUCKET_NAME, Key: file.name, Body })
+      );
     })
   );
   return NextResponse.json(response);
