@@ -2,30 +2,62 @@ import * as React from "react";
 import useSWR from "swr";
 import Image from "next/image";
 
-export const Images = () => {
+export const Images = ({ loading }: { loading: boolean }) => {
+  console.log("app/components/Images");
+
   const { data } = useSWR<{ Key?: string }[]>(
     "/api/documents",
     async (path: string) => {
+      console.log("fetch(", path, ")");
       const f = await fetch(path).then((res) => res.json());
+      console.log("f:", f);
       return f;
     }
   );
+  const audios = data?.filter(
+    (image) =>
+      typeof image.Key == "string" &&
+      image.Key != "" &&
+      !/\//.test(image.Key) &&
+      /\.wav/.test(image.Key)
+  );
+  const images = data?.filter(
+    (image) =>
+      typeof image.Key == "string" &&
+      image.Key != "" &&
+      !/\//.test(image.Key) &&
+      !/\.wav/.test(image.Key)
+  );
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {data
-        ?.filter(
-          (image) =>
-            typeof image.Key == "string" &&
-            image.Key != "" &&
-            !/\//.test(image.Key)
-        )
-        .map((image, imageIdx) => (
-          <S3Image
-            Key={image?.Key ? image.Key : "p" + imageIdx}
-            key={image?.Key ? image.Key : "p" + imageIdx}
-          />
-        ))}
-    </div>
+    <>
+      {images && (
+        <>
+          <h2 className="w-full text-center text-2xl font-bold p-4">Images</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {images.map((image, imageIdx) => (
+              <S3Image
+                Key={image?.Key ? image.Key : "p" + imageIdx}
+                key={image?.Key ? image.Key : "p" + imageIdx}
+              />
+            ))}
+          </div>
+        </>
+      )}
+      {audios && (
+        <>
+          <h2 className="w-full text-center text-2xl font-bold p-4">Audios</h2>
+          <div id="audios" className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {audios.map((image, imageIdx) => (
+              <figure key={image.Key}>
+                <figcaption>Listen to {image.Key?.slice(10, 20)}:</figcaption>
+                <audio controls src={image.Key}></audio>
+                <a href={image.Key}> Download audio </a>
+              </figure>
+            ))}
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
