@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Images } from "./components";
 
 export default function Home() {
-  const inputRef = React.useRef<HTMLInputElement>();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 gap-8">
@@ -34,7 +34,7 @@ export default function Home() {
             <input className="bg-red-200" type="file" ref={inputRef} />
             <button
               onClick={async () => {
-                const input: HTMLInputElement | undefined = inputRef.current;
+                const input: HTMLInputElement | null = inputRef.current;
                 if (!input) {
                   return;
                 }
