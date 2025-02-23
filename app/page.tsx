@@ -55,7 +55,7 @@ export default function Home() {
                 });
                 await response.json();
                 if (inputRef?.current) {
-                  inputRef.current.value = null;
+                  inputRef.current.value = "";
                 }
                 setUploading(false);
               }}
