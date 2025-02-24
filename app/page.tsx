@@ -93,7 +93,7 @@ export default function Home() {
      /:/  /     \:\__\        \:\__\        \::/  /       \::/  /        /:/  /   
      \/__/       \/__/         \/__/         \/__/         \/__/         \/__/     */}
       <div className="bg-slate-900 absoslute b-0 r-0 w-full h-auto rounded-xl p-4 sm:p-8 lg:p-12">
-        <Images loading={!!uploading} />
+        <Images setUploading={setUploading} loading={!!uploading} />
       </div>
       {/* <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left"> */}
       {/* <a

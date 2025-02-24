@@ -8,9 +8,9 @@ const BUCKET_NAME = "boombahtime-media";
 const BUCKET_REGION = "us-east-2";
 const s3 = new S3Client({ region: BUCKET_REGION });
 
-// Bucket and s3: same as above
 export async function GET(_: Request, { params }: { params: { key: string } }) {
-  const command = new GetObjectCommand({
+  console.log("deleteing:", params.Key);
+  const command = new DeleteObjectCommand({
     Bucket: BUCKET_NAME,
     Key: params.key,
   });
